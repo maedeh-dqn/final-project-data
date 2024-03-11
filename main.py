@@ -39,4 +39,12 @@ def question_3():
     Ave_runtime_per_year_df = df.groupby("release_year").mean().reset_index()
     Ave_runtime_per_year_df.to_csv(".\Question_3.csv")
     
-question_3()
+def question_4():
+    New_data = get_data()
+    df = New_data[["release_year", "runtime"]]
+    df = df.drop(df[df["runtime"] == 0].index)
+    Ave_runtime_per_year_df = df.groupby("release_year").mean().reset_index()
+    Ave_runtime_per_year_df["hour_min_format"] = pd.to_datetime(Ave_runtime_per_year_df.runtime, unit="m").dt.strftime("%H:%M")
+    Ave_runtime_per_year_df.to_csv(".\Question_4.csv")
+    
+question_4()
