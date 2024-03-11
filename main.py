@@ -126,3 +126,10 @@ def question_7():
     plt.title('Rutime Distribution (1960-2015)')
     plt.xlabel('Runtime')
     plt.show()
+        
+def question_8():
+    New_data = get_data()
+    budget_alloc_df = New_data[['budget', 'release_year']]
+    budget_alloc_df = budget_alloc_df.drop(budget_alloc_df[budget_alloc_df ['budget'] < 500000].index).sort_values('budget').reset_index()
+    mean_budget_alloc = budget_alloc_df['budget'].mean()
+    print(f'The Average Budget Allocated to Movies During 1960-2015 is: {mean_budget_alloc}')
