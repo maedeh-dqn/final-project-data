@@ -133,3 +133,11 @@ def question_8():
     budget_alloc_df = budget_alloc_df.drop(budget_alloc_df[budget_alloc_df ['budget'] < 500000].index).sort_values('budget').reset_index()
     mean_budget_alloc = budget_alloc_df['budget'].mean()
     print(f'The Average Budget Allocated to Movies During 1960-2015 is: {mean_budget_alloc}')
+       
+def question_9():
+    New_data = get_data()
+    revenue_alloc_df = New_data[['revenue', 'release_year']]
+    revenue_alloc_df = revenue_alloc_df.drop(revenue_alloc_df[revenue_alloc_df ['revenue'] < 500000].index).sort_values('revenue').reset_index()
+    mean_revenue_alloc = revenue_alloc_df['revenue'].mean()
+    print(f'The Average Revenue Allocated to Movies During 1960-2015 is: {mean_revenue_alloc}')
+    
