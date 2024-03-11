@@ -65,7 +65,6 @@ def question_5_part_a():
 
     Minimum_runtimes.to_csv(".\Question_5_PartA.csv")
     
-
 def question_5_part_b():
     New_data = get_data()
     sho_lo_df = New_data[["original_title", "runtime"]]
@@ -73,5 +72,26 @@ def question_5_part_b():
     Maximum_runtime = sho_lo_df.loc[sho_lo_df["runtime"].idxmax()]
     print(Maximum_runtime)
     
-question_5_part_b()
+def question_6_part_a():
+    New_data = get_data()
+    sho_lo_each_year = New_data[["original_title", "release_year", "runtime"]]
+    sho_lo_each_year = sho_lo_each_year.drop(sho_lo_each_year[sho_lo_each_year["runtime"] == 0].index)
+    sho_lo_each_year = sho_lo_each_year.sort_values('runtime')
+
+    sho_lo_each_year_grouped = sho_lo_each_year.groupby("release_year")
+
+    Minimum_runtimes_each_year = pd.DataFrame(columns=["original_title", "release_year", "runtime"])
+    Minimum_runtimes_each_year_index = 0
+
+    for group_name, group_items in sho_lo_each_year_grouped:
+        min = group_items.iloc[0].get("runtime")
+        for row_index, row in group_items.iterrows():
+            if row.get("runtime") > min:
+                break
+            else:
+                Minimum_runtimes_each_year.loc[Minimum_runtimes_each_year_index] = row
+                Minimum_runtimes_each_year_index += 1
+
+    Minimum_runtimes_each_year.to_csv(".\Question_6_PartA.csv")
     
+question_6_part_a()
