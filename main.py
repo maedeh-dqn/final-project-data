@@ -65,4 +65,13 @@ def question_5_part_a():
 
     Minimum_runtimes.to_csv(".\Question_5_PartA.csv")
     
-question_5_part_a()
+
+def question_5_part_b():
+    New_data = get_data()
+    sho_lo_df = New_data[["original_title", "runtime"]]
+    sho_lo_df = sho_lo_df.drop(sho_lo_df[sho_lo_df["runtime"] == 0].index)
+    Maximum_runtime = sho_lo_df.loc[sho_lo_df["runtime"].idxmax()]
+    print(Maximum_runtime)
+    
+question_5_part_b()
+    
