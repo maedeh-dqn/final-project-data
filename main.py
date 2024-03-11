@@ -24,4 +24,12 @@ def question_1():
     distribution_per_year = New_data["release_year"].value_counts()
     distribution_per_year.to_csv('.\Question_1.csv')
     
-question_1()
+def question_2():
+    New_data = get_data()
+    distribution_per_year = New_data["release_year"].value_counts()
+    distribution_per_year.plot(kind="bar", figsize=(10, 10))
+    plt.ylabel('Frequency')
+    plt.title('Release Trend')
+    plt.show()
+    
+question_2()
