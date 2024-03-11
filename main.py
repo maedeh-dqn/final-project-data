@@ -97,8 +97,7 @@ def question_6_part_a():
 def question_6_part_b():
     New_data = get_data()
     sho_lo_each_year = New_data[["original_title", "release_year", "runtime"]]
-    sho_lo_each_year = sho_lo_each_year.drop(
-    sho_lo_each_year[sho_lo_each_year["runtime"] == 0].index)
+    sho_lo_each_year = sho_lo_each_year.drop(sho_lo_each_year[sho_lo_each_year["runtime"] == 0].index)
     sho_lo_each_year = sho_lo_each_year.sort_values('runtime', ascending=False)
 
     sho_lo_each_year_grouped = sho_lo_each_year.groupby("release_year")
@@ -115,11 +114,6 @@ def question_6_part_b():
                 Maximum_runtimes_each_year.loc[Maximum_runtimes_each_year_index] = row
                 Maximum_runtimes_each_year_index += 1
 
-    Maximum_runtimes_each_year.to_csv(".\Question_6_PartB.csv") 
+    Maximum_runtimes_each_year.to_csv(".\Question_6_PartB.csv")  
     
-def question_16():
-    New_data = get_data()
-    top_5_VC_df = New_data[['original_title', 'release_year', 'vote_count']].sort_values('vote_count', ascending=False).reset_index().head(5)
-    top_5_VC_df.to_csv(".\Question_16.csv")
-    
-question_16()
+question_6_part_b()
