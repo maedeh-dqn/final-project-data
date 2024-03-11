@@ -148,16 +148,32 @@ def question_10():
     budget_revenue_alloc_df.drop(budget_revenue_alloc_df[budget_revenue_alloc_df ['revenue'] < 500000].index, inplace=True)
     mean_budget_revenue_df = budget_revenue_alloc_df.groupby('release_year').mean().reset_index()
     mean_budget_revenue_df.to_csv(".\Question_10.csv")
+ 
+ 
+def question_11():
+    New_data = get_data()   
+    budget_revenue_alloc_df = New_data[['release_year', 'budget', 'revenue']].sort_values('revenue', ascending=True)
+    budget_revenue_alloc_df.drop(budget_revenue_alloc_df[budget_revenue_alloc_df ['budget'] < 500000].index, inplace=True)
+    budget_revenue_alloc_df.drop(budget_revenue_alloc_df[budget_revenue_alloc_df ['revenue'] < 500000].index, inplace=True)
+    mean_budget_revenue_df = budget_revenue_alloc_df.groupby('release_year').mean().reset_index()
+    mean_budget_revenue_df.plot.scatter(x='budget', y='revenue', s=100, c='black', alpha= 0.6 )
+    plt.xscale('log')
+    plt.yscale('log')
+    plt.title('Budget Vs. Revenue')
+    plt.show()
+ 
+ 
+question_11()
      
 def question_16():
     New_data = get_data()
     top_5_VC_df = New_data[['original_title', 'release_year', 'vote_count']].sort_values('vote_count', ascending=False).reset_index().head(5)
     top_5_VC_df.to_csv(".\Question_16.csv")
-    
-    
+       
 def question_17():
     New_data = get_data()
     top_5_VA_df = New_data[['original_title', 'release_year', 'vote_average']].sort_values('vote_average', ascending=False).reset_index().head(5)
     top_5_VA_df.to_csv(".\Question_17.csv")
     
-question_17()
+    
+    
