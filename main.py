@@ -150,4 +150,10 @@ def question_10():
     mean_budget_revenue_df.to_csv(".\Question_10.csv")
     
     
-question_10()
+def question_16():
+    New_data = get_data()
+    top_5_VC_df = New_data[['original_title', 'release_year', 'vote_count']].sort_values('vote_count', ascending=False).reset_index().head(5)
+    top_5_VC_df.to_csv(".\Question_16.csv")
+    
+    
+question_16()
