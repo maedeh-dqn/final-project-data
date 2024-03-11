@@ -47,4 +47,22 @@ def question_4():
     Ave_runtime_per_year_df["hour_min_format"] = pd.to_datetime(Ave_runtime_per_year_df.runtime, unit="m").dt.strftime("%H:%M")
     Ave_runtime_per_year_df.to_csv(".\Question_4.csv")
     
-question_4()
+def question_5_part_a():
+    New_data = get_data()
+    sho_lo_df = New_data[["original_title", "runtime"]]
+    sho_lo_df = sho_lo_df.drop(sho_lo_df[sho_lo_df["runtime"] == 0].index)
+
+    Minimum_runtimes = pd.DataFrame(columns=["original_title", "runtime"])
+    sho_lo_df = sho_lo_df.sort_values("runtime")
+
+    min = sho_lo_df.iloc[0].get("runtime")
+
+    for index, row in sho_lo_df.iterrows():
+        if row.get("runtime") > min:
+            break
+        else:
+            Minimum_runtimes.loc[index] = row
+
+    Minimum_runtimes.to_csv(".\Question_5_PartA.csv")
+    
+question_5_part_a()
