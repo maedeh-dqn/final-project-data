@@ -94,4 +94,28 @@ def question_6_part_a():
 
     Minimum_runtimes_each_year.to_csv(".\Question_6_PartA.csv")
     
-question_6_part_a()
+def question_6_part_b():
+    New_data = get_data()
+    sho_lo_each_year = New_data[["original_title", "release_year", "runtime"]]
+    sho_lo_each_year = sho_lo_each_year.drop(
+    sho_lo_each_year[sho_lo_each_year["runtime"] == 0].index)
+    sho_lo_each_year = sho_lo_each_year.sort_values('runtime', ascending=False)
+
+    sho_lo_each_year_grouped = sho_lo_each_year.groupby("release_year")
+
+    Maximum_runtimes_each_year = pd.DataFrame(columns=["original_title", "release_year", "runtime"])
+    Maximum_runtimes_each_year_index = 0
+
+    for group_name, group_items in sho_lo_each_year_grouped:
+        max = group_items.iloc[0].get("runtime")
+        for row_index, row in group_items.iterrows():
+            if row.get("runtime") < max:
+                break
+            else:
+                Maximum_runtimes_each_year.loc[Maximum_runtimes_each_year_index] = row
+                Maximum_runtimes_each_year_index += 1
+
+    Maximum_runtimes_each_year.to_csv(".\Question_6_PartB.csv") 
+    
+question_6_part_b()
+    
