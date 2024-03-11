@@ -32,4 +32,11 @@ def question_2():
     plt.title('Release Trend')
     plt.show()
     
-question_2()
+def question_3():
+    New_data = get_data()
+    df = New_data[["release_year", "runtime"]]
+    df = df.drop(df[df["runtime"] == 0].index)
+    Ave_runtime_per_year_df = df.groupby("release_year").mean().reset_index()
+    Ave_runtime_per_year_df.to_csv(".\Question_3.csv")
+    
+question_3()
