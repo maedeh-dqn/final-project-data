@@ -117,15 +117,9 @@ def question_6_part_b():
 
     Maximum_runtimes_each_year.to_csv(".\Question_6_PartB.csv") 
     
-def question_7():
+def question_16():
     New_data = get_data()
-    runtime_distribution_per_year = New_data[['release_year', 'runtime']]
-    runtime_distribution_per_year = runtime_distribution_per_year.drop(runtime_distribution_per_year[runtime_distribution_per_year["runtime"] == 0].index)
-    runtime_distribution_per_year = runtime_distribution_per_year.groupby('release_year').sum().reset_index()
-    #print(runtime_distribution_per_year.sort_values('runtime'))
-    runtime_distribution_per_year.runtime.plot.hist(bins=10, figsize=(10, 10), edgecolor='black', alpha= 0.6, color='yellow')
-    plt.title('Rutime Distribution (1960-2015)')
-    plt.xlabel('Runtime')
-    plt.show()
+    top_5_VC_df = New_data[['original_title', 'release_year', 'vote_count']].sort_values('vote_count', ascending=False).reset_index().head(5)
+    top_5_VC_df.to_csv(".\Question_16.csv")
     
-question_7()
+question_16()
