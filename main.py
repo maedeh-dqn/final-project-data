@@ -171,6 +171,24 @@ def question_13():
     profit_df.to_csv(".\Question_13.csv")
     most_profitable_ever = profit_df.loc[profit_df["profit"].idxmax()]
     print(f'The most profitable movie is:\n {most_profitable_ever}')
+
+def question_14():
+    New_data = get_data()
+    profit_df = New_data[['original_title', 'release_year', 'budget', 'revenue']]
+    profit_df.drop(profit_df[profit_df ['budget'] < 500000].index, inplace=True)
+    profit_df.drop(profit_df[profit_df ['revenue'] < 500000].index, inplace=True)
+    profit_df['profit'] = profit_df["revenue"] - profit_df["budget"]   
+    profit_df_grouped = profit_df.groupby('release_year')
+    most_profitable_each_year = pd.DataFrame(columns=['original_title', 'release_year', 'budget', 'revenue', 'profit'])
+    most_profitable_each_year_index = 0
+    for group_name, group_items in profit_df_grouped:
+        max_item = group_items.sort_values('profit', ascending=False).iloc[0]
+        most_profitable_each_year.loc[most_profitable_each_year_index] = max_item
+        most_profitable_each_year_index += 1
+
+    most_profitable_each_year.to_csv(".\Question_14.csv")
+
+question_14()
         
 def question_16():
     New_data = get_data()
