@@ -149,7 +149,6 @@ def question_10():
     mean_budget_revenue_df = budget_revenue_alloc_df.groupby('release_year').mean().reset_index()
     mean_budget_revenue_df.to_csv(".\Question_10.csv")
  
- 
 def question_11():
     New_data = get_data()   
     budget_revenue_alloc_df = New_data[['release_year', 'budget', 'revenue']].sort_values('revenue', ascending=True)
@@ -161,10 +160,18 @@ def question_11():
     plt.yscale('log')
     plt.title('Budget Vs. Revenue')
     plt.show()
- 
- 
-question_11()
-     
+
+def question_13():
+    New_data = get_data()
+    profit_df = New_data[['original_title', 'release_year', 'budget', 'revenue']]
+    profit_df.drop(profit_df[profit_df ['budget'] < 500000].index, inplace=True)
+    profit_df.drop(profit_df[profit_df ['revenue'] < 500000].index, inplace=True)
+    profit_df['profit'] = profit_df["revenue"] - profit_df["budget"]
+    #profit_df_sorted = profit_df.sort_values('profit', ascending=False)
+    profit_df.to_csv(".\Question_13.csv")
+    most_profitable_ever = profit_df.loc[profit_df["profit"].idxmax()]
+    print(f'The most profitable movie is:\n {most_profitable_ever}')
+        
 def question_16():
     New_data = get_data()
     top_5_VC_df = New_data[['original_title', 'release_year', 'vote_count']].sort_values('vote_count', ascending=False).reset_index().head(5)
