@@ -187,9 +187,7 @@ def question_14():
         most_profitable_each_year_index += 1
 
     most_profitable_each_year.to_csv(".\Question_14.csv")
-
-question_14()
-        
+       
 def question_16():
     New_data = get_data()
     top_5_VC_df = New_data[['original_title', 'release_year', 'vote_count']].sort_values('vote_count', ascending=False).reset_index().head(5)
